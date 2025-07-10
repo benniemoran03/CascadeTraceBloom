@@ -1,0 +1,20 @@
+
+---
+
+### 🐍 `cascade/filter_chain.py`
+```python
+from pybloom_live import BloomFilter
+
+class FilterChain:
+    def __init__(self, stages=3, capacity=10000):
+        self.filters = [BloomFilter(capacity, 0.01) for _ in range(stages)]
+
+    def check(self, item: str) -> bool:
+        for f in self.filters:
+            if item in f:
+                return True
+        return False
+
+    def add(self, item: str):
+        for f in self.filters:
+            f.add(item)
