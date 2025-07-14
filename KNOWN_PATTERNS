@@ -1,0 +1,10 @@
+KNOWN_PATTERNS = [
+    "user logged in",
+    "connection reset",
+    "service unavailable",
+    "retry failed",
+    "timeout occurred"
+]
+
+def match_known_patterns(line: str) -> bool:
+    return any(pat in line.lower() for pat in KNOWN_PATTERNS)
